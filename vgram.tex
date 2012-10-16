@@ -40,9 +40,9 @@
 \begin{frame}
     \frametitle{Background}
     \begin{itemize}
-        \item tipo de neurônio
-        \item seguem PLN - estado $u$
-        \item propagação
+        \item PLN - estado $u$
+        \item capacidade de generalização
+        \item generalização a nível de rede
     \end{itemize}
 \end{frame}
 \section{G-RAM}
@@ -50,10 +50,13 @@
 \begin{frame}
     \frametitle{G-RAM}
     \begin{itemize}
-        \item tipo de neurônio
-        \item seguem PLN - estado $u$
         \item treino pequeno: hesitação
-        \item diferencial: propagação
+        \item generalização a nível de neurônio
+        \item diferenciais:
+            \begin{itemize}
+                \item propagação
+                \item generalização
+            \end{itemize}
     \end{itemize}
 \end{frame}
 \subsection{Propagação}
@@ -437,6 +440,38 @@
         \item[001110] 1
     \end{description}
 \end{frame}
+\begin{frame}
+    \frametitle{Exemplo da G-RAM}
+    Consultas:
+
+    \begin{table}
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+            \hline
+                &       000 &       001 &       010 &       011 &       100 &       101 &       110 &       111\\
+            \hline
+            000 &        u  &        1  &        1  &        1  &        1  &        u  &        u  & \alert 1 \\
+            \hline
+            001 &        1  &        0  &        u  &        1  &        1  &        1  &        1  & \alert u \\
+            \hline
+            010 &        1  &        0  &        u  &        1  &        1  &        1  &        1  &        u \\
+            \hline
+            011 &        0  &        u  &        1  &        0  &        1  &        1  &        1  &        1 \\
+            \hline
+            100 &        1  &        0  &        1  &        1  &        1  &        1  &        1  &        1 \\
+            \hline
+            101 &        0  &        1  &        1  &        0  &        1  &        0  &        u  &        1 \\
+            \hline
+            110 &        0  &        1  &        1  &        0  &        1  &        0  &        u  &        1 \\
+            \hline
+            111 &        0  &        0  &        0  &        1  &        0  &        1  &        1  &        0 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    \begin{description}
+        \item[111001] 1 - generalização: 111000
+    \end{description}
+\end{frame}
 \section{VG-RAM}
 \subsection{Motivação}
 \begin{frame}
@@ -445,12 +480,14 @@
         \item limites em memória
         \item alocação por demanda
         \item par input-output
+        \item tabelas de consulta
         \item consulta por distância
             \begin{itemize}
                 \item colisão: aleatório
             \end{itemize}
     \end{itemize}
 \end{frame}
+\subsection{Estratégia}
 \begin{frame}
     \frametitle{Exemplo da VG-RAM}
     VG-RAM de 6 bits e $d = 2$
@@ -477,7 +514,6 @@
         \end{tabular}
     \end{table}
 \end{frame}
-\subsection{Estratégia}
 \begin{frame}
     \frametitle{Exemplo da VG-RAM}
     Valor de treino 011100 associado a 1:
